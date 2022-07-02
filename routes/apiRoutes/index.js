@@ -6,6 +6,8 @@ const router = express.Router();
 router.use(require('./candidateRoutes'));
 //require access to partyRoutes
 router.use(require('./partyRoutes'));
+//request access to voterRoutes
+router.use(require('./voterRoutes'));
 
 module.exports = router;
 

@@ -8,6 +8,8 @@ router.use(require('./candidateRoutes'));
 router.use(require('./partyRoutes'));
 //request access to voterRoutes
 router.use(require('./voterRoutes'));
+//request access to voteRoutes
+router.use(require('./voteRoutes'));
 
 module.exports = router;
 

@@ -80,7 +80,7 @@ const db = mysql.createConnection(
       }
     });
   });
-  
+
 // --------------------------
 // --------------------------
 
@@ -170,6 +170,35 @@ db.query(sql, params, (err, result) => {
             message: 'success',
             data: body
         });
+    });
+});
+
+// Update a candidate
+
+app.put('/api/candidate/:id', (req, res) => {
+    const errors = inputCheck(req.body, 'party_id');
+        if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+        }
+    const sql = `UPDATE candidates SET party_id = ?
+    WHERE id = ?`;
+    const params = [req.body.party_id, req.params.id];
+    db.query(sql, params, (err, result) => {
+        if(err) {
+            res.status(400).json({ error: err.message });
+            //check if a record was found
+        } else if (!result.affectedRows) {
+            res.json({
+                message: 'Candidate not found'
+            });
+        } else {
+            res.json({
+                message: 'success',
+                data: req.body,
+                change: result.affectedRows
+            });
+        }
     });
 });
 
